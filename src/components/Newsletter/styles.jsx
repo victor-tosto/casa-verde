@@ -4,6 +4,10 @@ export const NewsletterContainer = styled.section`
     display: flex;
     position: relative;
     margin-top: 15rem;
+
+    div:first-child {
+        z-index: 2;
+    }
 `;
 
 export const NewsletterText = styled.p`
@@ -70,4 +74,5 @@ export const PlantImage = styled.div`
     background-size: contain;
     width: 787px;
     height: 1183px;
+    z-index: 1;
 `;
