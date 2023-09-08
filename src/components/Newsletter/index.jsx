@@ -7,13 +7,21 @@ const Newsletter = () => {
 
     const [email, setEmail] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(false);
+    const [error, setError] = useState(false);
 
     const inputEmail = (e) => {
         setEmail(e.target.value);
     }
 
     const verifyEmail = (email) => {
-        if (email.includes('@')) setIsValidEmail(!isValidEmail);
+        if (email.includes('@')) {
+            setIsValidEmail(true);
+            setError(false);
+            setEmail('');
+        } else {
+            setIsValidEmail(false);
+            setError(true);
+        }
     };
 
     return (
@@ -25,10 +33,14 @@ const Newsletter = () => {
                 <InputContainer>
                     <EmailIcon />
                     <form>
-                        <input type="email" value={email} onChange={inputEmail} minLength="4" placeholder="Insira seu e-mail" />
-                        <button type="submit">Assinar newsletter</button>
+                        <input type="email" value={email} onChange={(e) => inputEmail(e)} minLength="4" placeholder="Insira seu e-mail" />
+                        <button type="submit" onClick={e => {
+                            e.preventDefault();
+                            verifyEmail(email);
+                        }}>Assinar newsletter</button>
                     </form>
                 </InputContainer>
+                {error && <p style={{color: 'red', fontSize: '1.6rem', margin: '1rem 0'}}>Por favor, insira um e-mail válido</p>}
             </div>
             {isValidEmail && <NewsletterModal />}
             <PlantImage>
