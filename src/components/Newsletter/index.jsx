@@ -2,6 +2,7 @@ import { InputContainer, NewsletterBoldText, NewsletterContainer, NewsletterPara
 import EmailIcon from "./EmailIcon";
 import { useState } from "react";
 import NewsletterModal from "./NewsletterModal";
+import sendEmail from "../../sendEmail";
 
 const Newsletter = () => {
 
@@ -11,7 +12,7 @@ const Newsletter = () => {
 
     const inputEmail = (e) => {
         setEmail(e.target.value);
-    }
+    };
 
     const verifyEmail = (email) => {
         if (email.includes('@')) {
@@ -37,6 +38,7 @@ const Newsletter = () => {
                         <button type="submit" onClick={e => {
                             e.preventDefault();
                             verifyEmail(email);
+                            sendEmail(email);
                         }}>Assinar newsletter</button>
                     </form>
                 </InputContainer>
